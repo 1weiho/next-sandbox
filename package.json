@@ -1,0 +1,16 @@
+{
+  "name": "next-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "bunchee"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bunchee": "^6.3.2",
+    "typescript": "^5.7.3"
+  }
+}
