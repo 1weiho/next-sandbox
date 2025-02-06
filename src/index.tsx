@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const foo = () => {
-  return <div>Hello World</div>;
+export const Foo = () => {
+  return <div>Hello World from next-sandbox</div>;
 };
