@@ -4,3 +4,9 @@ dist
 # Package
 pnpm-lock.yaml
 node_modules
+
+# Next.js
+.next
+
+# Turbo
+.turbo
