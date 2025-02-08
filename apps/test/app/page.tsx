@@ -1,5 +1,3 @@
-'use client';
-
 import { withSandbox } from 'next-sandbox';
 
 interface Post {
@@ -14,17 +12,20 @@ const posts: Post[] = [
   },
 ];
 
+const getAllPosts = async () => {
+  'use server';
+  const sleep = (time = 3000) =>
+    new Promise((resolve) => setTimeout(resolve, time));
+  await sleep(1000);
+
+  return posts;
+};
+
 export default withSandbox({
   functions: [
     {
       name: 'Get All Posts',
-      function: async () => {
-        const sleep = (time = 3000) =>
-          new Promise((resolve) => setTimeout(resolve, time));
-        await sleep(1000);
-
-        return posts;
-      },
+      function: getAllPosts,
     },
   ],
 });

@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { SandboxProvider } from './sandbox-context';
 import { SandboxUI } from './sandbox-ui';
