@@ -16,7 +16,10 @@ const getAllPosts = async () => {
   'use server';
   const sleep = (time = 3000) =>
     new Promise((resolve) => setTimeout(resolve, time));
-  await sleep(1000);
+
+  const randomSleepTime = Math.floor(Math.random() * 2000) + 500;
+
+  await sleep(randomSleepTime);
 
   return posts;
 };

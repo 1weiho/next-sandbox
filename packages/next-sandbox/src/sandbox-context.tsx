@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import type { SandboxFunction } from './with-sandbox';
 
 interface SandboxContextType {
   functions: SandboxFunction[];
   executionStatus: Record<string, string>;
-  executionDuration: Record<string, number>;
+  executionDurations: Record<string, number[]>;
   logs: Record<string, string[]>;
   executeFunction: (name: string) => Promise<void>;
 }
@@ -24,8 +23,8 @@ export function SandboxProvider({
   const [executionStatus, setExecutionStatus] = useState<
     Record<string, string>
   >({});
-  const [executionDuration, setExecutionDuration] = useState<
-    Record<string, number>
+  const [executionDurations, setExecutionDurations] = useState<
+    Record<string, number[]>
   >({});
   const [logs, setLogs] = useState<Record<string, string[]>>({});
 
@@ -52,7 +51,11 @@ export function SandboxProvider({
     }
 
     const endTime = Date.now();
-    setExecutionDuration((prev) => ({ ...prev, [name]: endTime - startTime }));
+    const duration = endTime - startTime;
+    setExecutionDurations((prev) => {
+      const prevDurations = prev[name] || [];
+      return { ...prev, [name]: [...prevDurations, duration] };
+    });
   };
 
   return (
@@ -60,7 +63,7 @@ export function SandboxProvider({
       value={{
         functions,
         executionStatus,
-        executionDuration,
+        executionDurations,
         logs,
         executeFunction,
       }}
