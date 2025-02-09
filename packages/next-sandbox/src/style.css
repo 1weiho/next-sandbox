@@ -119,7 +119,6 @@ body {
 .metric {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .metric-label {
