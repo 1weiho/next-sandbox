@@ -17,7 +17,7 @@ export function withSandbox(config: SandboxConfig) {
   return function SandboxWrapper() {
     return (
       <SandboxProvider functions={config.functions}>
-        <SandboxUI title={config.title} description={config.description} />
+        <SandboxUI />
       </SandboxProvider>
     );
   };
