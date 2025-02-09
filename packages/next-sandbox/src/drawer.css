@@ -1,0 +1,48 @@
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.drawer-content {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  z-index: 10;
+  outline: none;
+  width: 600px;
+  display: flex;
+  transform: var(--initial-transform, calc(100% + 8px));
+  transition: transform 0.3s ease;
+}
+
+.drawer-inner {
+  background-color: #fafafa;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+}
+
+.drawer-inner-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.drawer-title {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+
+.drawer-description {
+  color: #52525b;
+  margin-bottom: 8px;
+}
