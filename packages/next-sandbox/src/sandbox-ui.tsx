@@ -3,53 +3,68 @@
 import React from 'react';
 import { useSandbox } from './sandbox-context';
 import './style.css';
+import PlayIcon from './icons/play-icon';
+import LogIcon from './icons/log-icon';
 
-interface SandboxUIProps {
-  title?: string;
-  description?: string;
-}
-
-export function SandboxUI({
-  title = 'Sandbox Demo',
-  description = 'This page demonstrates the use of withSandbox HOC with server actions.',
-}: SandboxUIProps) {
-  const {
-    functions,
-    executionStatus,
-    executionDuration,
-    logs,
-    executeFunction,
-  } = useSandbox();
+export function SandboxUI() {
+  const { functions, executionStatus, executionDuration, executeFunction } =
+    useSandbox();
 
   return (
-    <div className="container">
-      <h1 className="title">{title}</h1>
-      <p className="description">{description}</p>
-      <div className="function-grid">
-        {functions.map((func) => (
-          <div key={func.name} className="function-card">
-            <h2 className="function-title">{func.name}</h2>
-            <div className="function-content">
-              <div className="function-info">
-                <p>Status: {executionStatus[func.name] || 'Not executed'}</p>
-                <p>
-                  Last execution duration:{' '}
-                  {executionDuration[func.name]
-                    ? `${executionDuration[func.name]}ms`
-                    : 'N/A'}
-                </p>
+    <div className="sandbox-container">
+      <h1 className="sandbox-title">next-sandbox</h1>
+      <div className="functions-wrapper">
+        <div className="functions-header">
+          <span className="functions-label">Function</span>
+          <span className="functions-count">{functions.length}</span>
+        </div>
+
+        {functions.map((func, index) => (
+          <div className="function-card" key={`${func.name}-${index}`}>
+            <div className="function-left">
+              <h2 className="function-name">{func.name}</h2>
+              <span className="function-pill success">
+                {executionStatus[func.name] || 'Not executed'}
+              </span>
+            </div>
+            <div className="function-right">
+              <div className="function-metrics">
+                <div className="metric">
+                  <span className="metric-label">AVG</span>
+                  <span className="metric-value">
+                    {executionDuration[func.name]
+                      ? `${executionDuration[func.name]}ms`
+                      : 'N/A'}
+                  </span>
+                </div>
+                <div className="metric">
+                  <span className="metric-label">P75</span>
+                  <span className="metric-value">
+                    {executionDuration[func.name]
+                      ? `${executionDuration[func.name]}ms`
+                      : 'N/A'}
+                  </span>
+                </div>
+                <div className="metric">
+                  <span className="metric-label">P95</span>
+                  <span className="metric-value">
+                    {executionDuration[func.name]
+                      ? `${executionDuration[func.name]}ms`
+                      : 'N/A'}
+                  </span>
+                </div>
               </div>
-              <button
-                className="execute-button"
-                onClick={() => executeFunction(func.name)}
-              >
-                Execute
-              </button>
-              <div className="logs-section">
-                <h4 className="logs-title">Logs:</h4>
-                <pre className="logs-content">
-                  {logs[func.name] ? logs[func.name].join('\n') : 'No logs yet'}
-                </pre>
+              <div className="function-actions">
+                <button className="icon-button" title="View logs">
+                  <LogIcon className="icon" />
+                </button>
+                <button
+                  className="icon-button"
+                  title="Execute"
+                  onClick={() => executeFunction(func.name)}
+                >
+                  <PlayIcon className="icon" />
+                </button>
               </div>
             </div>
           </div>
