@@ -3,11 +3,16 @@
 import React, { createContext, useContext, useState } from 'react';
 import type { SandboxFunction } from './with-sandbox';
 
+interface ExecutionRecord {
+  output: string;
+  status: 'success' | 'error';
+  duration: number;
+  timestamp: string;
+}
+
 interface SandboxContextType {
   functions: SandboxFunction[];
-  executionStatus: Record<string, string>;
-  executionDurations: Record<string, number[]>;
-  logs: Record<string, string[]>;
+  executionRecords: Record<string, ExecutionRecord[]>;
   executeFunction: (name: string) => Promise<void>;
 }
 
@@ -20,51 +25,53 @@ export function SandboxProvider({
   children: React.ReactNode;
   functions: SandboxFunction[];
 }) {
-  const [executionStatus, setExecutionStatus] = useState<
-    Record<string, string>
+  const [executionRecords, setExecutionRecords] = useState<
+    Record<string, ExecutionRecord[]>
   >({});
-  const [executionDurations, setExecutionDurations] = useState<
-    Record<string, number[]>
-  >({});
-  const [logs, setLogs] = useState<Record<string, string[]>>({});
 
   const executeFunction = async (name: string) => {
     const func = functions.find((f) => f.name === name);
     if (!func) return;
 
-    setExecutionStatus((prev) => ({ ...prev, [name]: 'running' }));
     const startTime = Date.now();
 
     try {
       const result = await func.function();
-      setExecutionStatus((prev) => ({ ...prev, [name]: 'success' }));
-      setLogs((prev) => ({
+      const endTime = Date.now();
+
+      const record: ExecutionRecord = {
+        output: JSON.stringify(result),
+        status: 'success',
+        duration: endTime - startTime,
+        timestamp: new Date().toISOString(),
+      };
+
+      setExecutionRecords((prev) => ({
         ...prev,
-        [name]: [...(prev[name] || []), JSON.stringify(result)],
+        [name]: [...(prev[name] || []), record],
       }));
     } catch (error) {
-      setExecutionStatus((prev) => ({ ...prev, [name]: 'error' }));
-      setLogs((prev) => ({
+      const endTime = Date.now();
+
+      const record: ExecutionRecord = {
+        output: `Error: ${String(error)}`,
+        status: 'error',
+        duration: endTime - startTime,
+        timestamp: new Date().toISOString(),
+      };
+
+      setExecutionRecords((prev) => ({
         ...prev,
-        [name]: [...(prev[name] || []), `Error: ${error}`],
+        [name]: [...(prev[name] || []), record],
       }));
     }
-
-    const endTime = Date.now();
-    const duration = endTime - startTime;
-    setExecutionDurations((prev) => {
-      const prevDurations = prev[name] || [];
-      return { ...prev, [name]: [...prevDurations, duration] };
-    });
   };
 
   return (
     <SandboxContext.Provider
       value={{
         functions,
-        executionStatus,
-        executionDurations,
-        logs,
+        executionRecords,
         executeFunction,
       }}
     >

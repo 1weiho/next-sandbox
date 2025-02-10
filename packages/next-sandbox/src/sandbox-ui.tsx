@@ -7,9 +7,8 @@ import PlayIcon from './icons/play-icon';
 import LogIcon from './icons/log-icon';
 import LogDrawer from './log-drawer';
 
-function calculateMetrics(durations) {
+function calculateMetrics(durations: number[]) {
   const sorted = [...durations].sort((a, b) => a - b);
-
   const sum = durations.reduce((acc, cur) => acc + cur, 0);
   const avg = sum / durations.length;
 
@@ -22,13 +21,25 @@ function calculateMetrics(durations) {
 }
 
 export function SandboxUI() {
-  const { functions, executionStatus, executionDurations, executeFunction } =
-    useSandbox();
+  const { functions, executionRecords, executeFunction } = useSandbox();
+
   const [openLogDrawer, setOpenLogDrawer] = React.useState(false);
+  const [selectedFunctionName, setSelectedFunctionName] = React.useState<
+    string | null
+  >(null);
+
+  const handleViewLogs = (funcName: string) => {
+    setSelectedFunctionName(funcName);
+    setOpenLogDrawer(true);
+  };
 
   return (
     <>
-      <LogDrawer open={openLogDrawer} onOpenChange={setOpenLogDrawer} />
+      <LogDrawer
+        open={openLogDrawer}
+        onOpenChange={setOpenLogDrawer}
+        functionName={selectedFunctionName}
+      />
 
       <div className="sandbox-container">
         <h1 className="sandbox-title">next-sandbox</h1>
@@ -39,10 +50,14 @@ export function SandboxUI() {
           </div>
 
           {functions.map((func, index) => {
-            const durations = executionDurations[func.name] || [];
+            const records = executionRecords[func.name] || [];
 
+            const durations = records.map((r) => r.duration);
             const metrics =
               durations.length > 0 ? calculateMetrics(durations) : null;
+
+            const lastRecord = records[records.length - 1];
+            const status = lastRecord ? lastRecord.status : 'Not executed';
 
             const latest =
               durations.length > 0 ? durations[durations.length - 1] : null;
@@ -51,9 +66,7 @@ export function SandboxUI() {
               <div className="function-card" key={`${func.name}-${index}`}>
                 <div className="function-left">
                   <h2 className="function-name">{func.name}</h2>
-                  <span className="function-pill success">
-                    {executionStatus[func.name] || 'Not executed'}
-                  </span>
+                  <span className={`function-pill ${status}`}>{status}</span>
                 </div>
                 <div className="function-right">
                   <div className="function-metrics">
@@ -86,7 +99,7 @@ export function SandboxUI() {
                     <button
                       className="icon-button"
                       title="View logs"
-                      onClick={() => setOpenLogDrawer(true)}
+                      onClick={() => handleViewLogs(func.name)}
                     >
                       <LogIcon className="icon" />
                     </button>
