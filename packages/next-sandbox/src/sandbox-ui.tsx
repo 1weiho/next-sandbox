@@ -6,6 +6,7 @@ import './style.css';
 import PlayIcon from './icons/play-icon';
 import LogIcon from './icons/log-icon';
 import LogDrawer from './log-drawer';
+import LoaderIcon from './icons/loader-icon';
 
 function calculateMetrics(durations: number[]) {
   const sorted = [...durations].sort((a, b) => a - b);
@@ -21,7 +22,8 @@ function calculateMetrics(durations: number[]) {
 }
 
 export function SandboxUI() {
-  const { functions, executionRecords, executeFunction } = useSandbox();
+  const { functions, executionRecords, executeFunction, executing } =
+    useSandbox();
 
   const [openLogDrawer, setOpenLogDrawer] = React.useState(false);
   const [selectedFunctionName, setSelectedFunctionName] = React.useState<
@@ -51,16 +53,14 @@ export function SandboxUI() {
 
           {functions.map((func, index) => {
             const records = executionRecords[func.name] || [];
-
             const durations = records.map((r) => r.duration);
             const metrics =
               durations.length > 0 ? calculateMetrics(durations) : null;
-
             const lastRecord = records[records.length - 1];
             const status = lastRecord ? lastRecord.status : 'Not executed';
-
             const latest =
               durations.length > 0 ? durations[durations.length - 1] : null;
+            const isExecuting = executing[func.name] || false;
 
             return (
               <div className="function-card" key={`${func.name}-${index}`}>
@@ -104,11 +104,17 @@ export function SandboxUI() {
                       <LogIcon className="icon" />
                     </button>
                     <button
-                      className="icon-button"
+                      className="icon-button execute-button"
                       title="Execute"
                       onClick={() => executeFunction(func.name)}
+                      disabled={isExecuting}
+                      data-executing={isExecuting ? 'true' : 'false'}
                     >
-                      <PlayIcon className="icon" />
+                      {isExecuting ? (
+                        <LoaderIcon className="icon spinner" />
+                      ) : (
+                        <PlayIcon className="icon" />
+                      )}
                     </button>
                   </div>
                 </div>

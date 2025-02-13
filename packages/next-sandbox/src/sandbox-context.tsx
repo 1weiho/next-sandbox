@@ -14,6 +14,7 @@ interface SandboxContextType {
   functions: SandboxFunction[];
   executionRecords: Record<string, ExecutionRecord[]>;
   executeFunction: (name: string) => Promise<void>;
+  executing: Record<string, boolean>;
 }
 
 const SandboxContext = createContext<SandboxContextType | undefined>(undefined);
@@ -28,11 +29,13 @@ export function SandboxProvider({
   const [executionRecords, setExecutionRecords] = useState<
     Record<string, ExecutionRecord[]>
   >({});
+  const [executing, setExecuting] = useState<Record<string, boolean>>({});
 
   const executeFunction = async (name: string) => {
     const func = functions.find((f) => f.name === name);
     if (!func) return;
 
+    setExecuting((prev) => ({ ...prev, [name]: true }));
     const startTime = Date.now();
 
     try {
@@ -64,6 +67,8 @@ export function SandboxProvider({
         ...prev,
         [name]: [...(prev[name] || []), record],
       }));
+    } finally {
+      setExecuting((prev) => ({ ...prev, [name]: false }));
     }
   };
 
@@ -73,6 +78,7 @@ export function SandboxProvider({
         functions,
         executionRecords,
         executeFunction,
+        executing,
       }}
     >
       {children}

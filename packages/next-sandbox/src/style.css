@@ -133,8 +133,22 @@
   background-color: #e2e2e3;
 }
 
+.execute-button[data-executing='true']:hover {
+  cursor: not-allowed;
+}
+
 .icon {
   width: 1rem;
   height: 1rem;
   color: var(--text-muted);
+}
+
+.spinner {
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
