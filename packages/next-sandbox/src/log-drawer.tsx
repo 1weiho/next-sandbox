@@ -3,7 +3,6 @@
 import { Drawer } from 'vaul';
 import React from 'react';
 import { useSandbox } from './sandbox-context';
-import './drawer.css';
 
 interface LogDrawerProps {
   open: boolean;
