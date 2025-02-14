@@ -38,7 +38,7 @@ export default function LogDrawer({
                 {currentRecords.length === 0 ? (
                   <p className="no-logs">No logs</p>
                 ) : (
-                  currentRecords.map((record, idx) => (
+                  [...currentRecords].reverse().map((record, idx) => (
                     <div key={idx} className="log-item">
                       <pre className="log-content">{record.output}</pre>
                       <div className="log-meta">
