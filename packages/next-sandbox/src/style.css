@@ -110,13 +110,15 @@
 }
 
 .function-metrics {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
   gap: 1.5rem;
 }
 
 .metric {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .metric-label {
