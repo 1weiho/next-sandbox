@@ -3,6 +3,8 @@
 import { Drawer } from 'vaul';
 import React from 'react';
 import { useSandbox } from './sandbox-context';
+import LoaderIcon from './icons/loader-icon';
+import PlayIcon from './icons/play-icon';
 
 interface LogDrawerProps {
   open: boolean;
@@ -15,7 +17,8 @@ export default function LogDrawer({
   onOpenChange,
   functionName,
 }: LogDrawerProps) {
-  const { executionRecords } = useSandbox();
+  const { executionRecords, executeFunction, executing } = useSandbox();
+  const isExecuting = executing[functionName] || false;
 
   const currentRecords = functionName
     ? executionRecords[functionName] || []
@@ -32,6 +35,19 @@ export default function LogDrawer({
                 <Drawer.Title className="drawer-title">
                   {functionName ?? 'No Function Selected'}
                 </Drawer.Title>
+                <button
+                  className="icon-button execute-button"
+                  title="Execute"
+                  onClick={() => executeFunction(functionName)}
+                  disabled={isExecuting}
+                  data-executing={isExecuting ? 'true' : 'false'}
+                >
+                  {isExecuting ? (
+                    <LoaderIcon className="icon spinner" />
+                  ) : (
+                    <PlayIcon className="icon" />
+                  )}
+                </button>
               </div>
 
               <div className="logs-container">

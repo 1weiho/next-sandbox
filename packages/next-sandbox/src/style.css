@@ -210,14 +210,18 @@
 }
 
 .drawer-head {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .drawer-title {
-  font-weight: 500;
+  font-weight: 700;
   color: var(--text-color);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 .no-logs {
