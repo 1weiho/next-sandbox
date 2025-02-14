@@ -254,6 +254,10 @@
   font-size: 0.9rem;
 }
 
+.log-content[data-error-message='true'] {
+  color: var(--color-danger);
+}
+
 .log-meta {
   display: flex;
   align-items: center;

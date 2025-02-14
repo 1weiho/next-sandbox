@@ -57,7 +57,7 @@ export function SandboxProvider({
       const endTime = Date.now();
 
       const record: ExecutionRecord = {
-        output: `Error: ${String(error)}`,
+        output: String(error),
         status: 'error',
         duration: endTime - startTime,
         timestamp: new Date().toISOString(),

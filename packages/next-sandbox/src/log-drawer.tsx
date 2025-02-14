@@ -56,7 +56,12 @@ export default function LogDrawer({
                 ) : (
                   [...currentRecords].reverse().map((record, idx) => (
                     <div key={idx} className="log-item">
-                      <pre className="log-content">{record.output}</pre>
+                      <pre
+                        data-error-message={record.status === 'error'}
+                        className="log-content"
+                      >
+                        {record.output}
+                      </pre>
                       <div className="log-meta">
                         <p className="log-time">
                           {new Date(record.timestamp).toLocaleTimeString() ??
