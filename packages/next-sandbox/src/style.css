@@ -7,6 +7,7 @@
   --color-gray-900: #111827;
   --color-success: #10b981;
   --color-danger: #f87171;
+  --color-blue: #378dd8;
 
   --radius-lg: 1rem;
   --radius-md: 0.5rem;
@@ -124,6 +125,19 @@
 .metric-label {
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+.metric-content {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.metic-indicator {
+  border-radius: 999px;
+  height: 4px;
+  width: 4px;
+  background-color: var(--indicator-color);
 }
 
 .metric-value {

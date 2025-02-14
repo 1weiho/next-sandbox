@@ -80,27 +80,67 @@ export function SandboxUI() {
                   <div className="function-metrics">
                     <div className="metric">
                       <span className="metric-label">AVG</span>
-                      <span className="metric-value">
-                        {metrics ? `${Math.round(metrics.avg)}ms` : 'N/A'}
-                      </span>
+                      <div className="metric-content">
+                        <span
+                          className="metic-indicator"
+                          style={
+                            {
+                              '--indicator-color': 'var(--color-gray-600)',
+                            } as React.CSSProperties
+                          }
+                        />
+                        <span className="metric-value">
+                          {metrics ? `${Math.round(metrics.avg)}ms` : 'N/A'}
+                        </span>
+                      </div>
                     </div>
                     <div className="metric">
                       <span className="metric-label">P75</span>
-                      <span className="metric-value">
-                        {metrics ? `${metrics.p75}ms` : 'N/A'}
-                      </span>
+                      <div className="metric-content">
+                        <span
+                          className="metic-indicator"
+                          style={
+                            {
+                              '--indicator-color': 'var(--color-blue)',
+                            } as React.CSSProperties
+                          }
+                        />
+                        <span className="metric-value">
+                          {metrics ? `${metrics.p75}ms` : 'N/A'}
+                        </span>
+                      </div>
                     </div>
                     <div className="metric">
                       <span className="metric-label">P95</span>
-                      <span className="metric-value">
-                        {metrics ? `${metrics.p95}ms` : 'N/A'}
-                      </span>
+                      <div className="metric-content">
+                        <span
+                          className="metic-indicator"
+                          style={
+                            {
+                              '--indicator-color': 'var(--color-danger)',
+                            } as React.CSSProperties
+                          }
+                        />
+                        <span className="metric-value">
+                          {metrics ? `${metrics.p95}ms` : 'N/A'}
+                        </span>
+                      </div>
                     </div>
                     <div className="metric">
                       <span className="metric-label">Latest</span>
-                      <span className="metric-value">
-                        {latest !== null ? `${latest}ms` : 'N/A'}
-                      </span>
+                      <div className="metric-content">
+                        <span
+                          className="metic-indicator"
+                          style={
+                            {
+                              '--indicator-color': 'var(--color-gray-600)',
+                            } as React.CSSProperties
+                          }
+                        />
+                        <span className="metric-value">
+                          {latest !== null ? `${latest}ms` : 'N/A'}
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className="function-actions">
