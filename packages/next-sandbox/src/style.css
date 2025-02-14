@@ -103,17 +103,6 @@
   margin: 0;
 }
 
-.function-pill {
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  color: var(--color-white);
-}
-
-.success {
-  background-color: var(--color-success);
-}
-
 .function-right {
   display: flex;
   align-items: center;
@@ -285,8 +274,8 @@
 }
 
 .log-status {
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 3px 8px;
+  border-radius: 10px;
   color: var(--color-white);
   font-weight: 500;
   font-size: 0.8rem;

@@ -66,7 +66,15 @@ export function SandboxUI() {
               <div className="function-card" key={`${func.name}-${index}`}>
                 <div className="function-left">
                   <h2 className="function-name">{func.name}</h2>
-                  <span className={`function-pill ${status}`}>{status}</span>
+                  {status !== 'Not executed' && (
+                    <span
+                      className={`log-status ${
+                        status === 'success' ? 'success' : 'fail'
+                      }`}
+                    >
+                      {status}
+                    </span>
+                  )}
                 </div>
                 <div className="function-right">
                   <div className="function-metrics">
