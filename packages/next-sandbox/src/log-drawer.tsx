@@ -42,7 +42,10 @@ export default function LogDrawer({
                     <div key={idx} className="log-item">
                       <pre className="log-content">{record.output}</pre>
                       <div className="log-meta">
-                        <p className="log-time">{record.timestamp ?? 'Just'}</p>
+                        <p className="log-time">
+                          {new Date(record.timestamp).toLocaleTimeString() ??
+                            'Just'}
+                        </p>
                         <div className="log-meta-end">
                           <p className="log-duration">
                             Duration: {record.duration}ms
