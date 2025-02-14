@@ -43,7 +43,7 @@ export function SandboxProvider({
       const endTime = Date.now();
 
       const record: ExecutionRecord = {
-        output: JSON.stringify(result),
+        output: JSON.stringify(result, null, 2),
         status: 'success',
         duration: endTime - startTime,
         timestamp: new Date().toISOString(),
