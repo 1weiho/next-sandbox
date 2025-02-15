@@ -1,7 +1,7 @@
 {
   "name": "next-sandbox",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Server action sandbox for Next.js.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -22,9 +22,20 @@
     "build": "bunchee",
     "dev": "bunchee --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "nextjs",
+    "sandbox"
+  ],
+  "author": "Yiwei Ho",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1weiho/next-sandbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/1weiho/next-sandbox/issues"
+  },
   "devDependencies": {
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
