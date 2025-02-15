@@ -1,6 +1,6 @@
 import React from 'react';
 import { SandboxProvider } from './sandbox-context';
-import { SandboxUI } from './sandbox-ui';
+import { SandboxServer } from './sandbox-server';
 
 export interface SandboxFunction {
   name: string;
@@ -9,15 +9,14 @@ export interface SandboxFunction {
 
 export interface SandboxConfig {
   functions: SandboxFunction[];
-  title?: string;
-  description?: string;
+  enable?: boolean;
 }
 
-export function withSandbox(config: SandboxConfig) {
+export function withSandbox({ functions, enable = true }: SandboxConfig) {
   return function SandboxWrapper() {
     return (
-      <SandboxProvider functions={config.functions}>
-        <SandboxUI />
+      <SandboxProvider functions={functions}>
+        <SandboxServer enable={enable} />
       </SandboxProvider>
     );
   };
