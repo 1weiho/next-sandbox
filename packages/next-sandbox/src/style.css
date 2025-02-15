@@ -268,6 +268,7 @@
   white-space: pre-wrap;
   margin: 0;
   font-size: 0.9rem;
+  overflow-x: auto;
 }
 
 .log-content[data-error-message='true'] {
