@@ -271,7 +271,23 @@
   overflow-x: auto;
 }
 
-.log-content[data-error-message='true'] {
+.log-content .string {
+  color: var(--color-success);
+}
+.log-content .number {
+  color: darkorange;
+}
+.log-content .boolean {
+  color: var(--color-blue);
+}
+.log-content .null {
+  color: rgb(195, 120, 215);
+}
+.log-content .key {
+  color: var(--color-danger);
+}
+
+.log-error {
   color: var(--color-danger);
 }
 

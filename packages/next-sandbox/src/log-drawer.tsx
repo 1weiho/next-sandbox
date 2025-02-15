@@ -5,6 +5,7 @@ import React from 'react';
 import { useSandbox } from './sandbox-context';
 import LoaderIcon from './icons/loader-icon';
 import PlayIcon from './icons/play-icon';
+import HighlightedJSON from './highlighted-json';
 
 interface LogDrawerProps {
   open: boolean;
@@ -56,12 +57,13 @@ export default function LogDrawer({
                 ) : (
                   [...currentRecords].reverse().map((record, idx) => (
                     <div key={idx} className="log-item">
-                      <pre
-                        data-error-message={record.status === 'error'}
-                        className="log-content"
-                      >
-                        {record.output}
-                      </pre>
+                      {record.status === 'success' ? (
+                        <HighlightedJSON jsonStr={record.output} />
+                      ) : (
+                        <pre className="log-content log-error">
+                          {record.output}
+                        </pre>
+                      )}
                       <div className="log-meta">
                         <p className="log-time">
                           {new Date(record.timestamp).toLocaleTimeString() ??
