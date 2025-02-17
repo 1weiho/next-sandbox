@@ -38,7 +38,7 @@ export default withSandbox({
 ### `withSandbox(config: SandboxConfig)`
 
 - **functions**: An array of server actions with a unique `name` and an asynchronous `function`.
-- **enable** (optional): Boolean flag to enable/disable the sandbox UI (default is `true`). When set to `true`, it will call `notFound()` from `next/navigation`, directly responding with a 404 error. A practical use case is to add an `enable` check inside `withSandbox` to determine if the environment is in production, ensuring the sandbox UI is only available in development or staging environments. For example:
+- **enable** (optional): Boolean flag to enable/disable the sandbox route (default is `true`). When set to `false`, it will call `notFound()` from `next/navigation`, directly responding with a 404 error. A practical use case is to add an `enable` check inside `withSandbox` to determine if the environment is in production, ensuring the sandbox route is only available in development or staging environments. For example:
 
 ```tsx
 import { withSandbox } from 'next-sandbox';
@@ -57,4 +57,4 @@ There are two ways to declare your server actions:
 
 2. **Import the server action from another file**: Store your server actions in separate files where `'use server'` is declared at the top of the file. Then, import and reference these functions inside `withSandbox`, as shown in the example at the top of this document.
 
-⚠️ **Do not declare server actions inside an inline function within `withSandbox` and add `'use server'` inside it. This will not work correctly.**
+⚠️ Do not declare server actions inside an inline function within `withSandbox` and add `'use server'` inside it. This will not work correctly.
