@@ -10,13 +10,18 @@ export interface SandboxFunction {
 export interface SandboxConfig {
   functions: SandboxFunction[];
   enable?: boolean;
+  middleware?: () => Promise<any>;
 }
 
-export function withSandbox({ functions, enable = true }: SandboxConfig) {
+export function withSandbox({
+  functions,
+  enable = true,
+  middleware,
+}: SandboxConfig) {
   return function SandboxWrapper() {
     return (
       <SandboxProvider functions={functions}>
-        <SandboxServer enable={enable} />
+        <SandboxServer enable={enable} middleware={middleware} />
       </SandboxProvider>
     );
   };
