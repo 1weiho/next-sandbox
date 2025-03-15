@@ -15,10 +15,11 @@ export default function HomePage() {
           Get Started
         </Link>
         <Link
-          href="/docs/install"
+          href="https://github.com/1weiho/next-sandbox"
+          target="_blank"
           className="bg-fd-secondary px-4 py-2 rounded-2xl text-fd-secondary-foreground"
         >
-          Installation
+          GitHub
         </Link>
       </div>
     </main>

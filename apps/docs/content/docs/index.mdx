@@ -1,13 +1,37 @@
 ---
-title: Hello World
-description: Your first document
+title: Get Started
+description: Getting Started with Next Sandbox
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+Next Sandbox is a lightweight package for testing and monitoring server actions in your Next.js application. It provides a simple UI to execute actions, view logs, and measure execution times.
 
-## What is Next?
+## Features
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+- **Execute Actions**: Run server actions directly from the UI.
+- **View Logs & Metrics**: Monitor execution status, logs, and performance metrics (AVG, P75, P95).
+
+## Installation
+
+```bash
+pnpm i next-sandbox
+```
+
+## Usage
+
+Create a dedicated route for sandbox usage and directly export `withSandbox` in `page.tsx`:
+
+`app/sandbox/page.tsx`
+
+```tsx
+import { withSandbox } from 'next-sandbox';
+import { seedPosts } from './seed-posts';
+
+export default withSandbox({
+  functions: [
+    {
+      name: 'Seed Posts',
+      function: seedPosts,
+    },
+  ],
+});
+```
