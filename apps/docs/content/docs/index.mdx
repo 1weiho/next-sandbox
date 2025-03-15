@@ -12,17 +12,15 @@ Next Sandbox is a lightweight package for testing and monitoring server actions 
 
 ## Installation
 
-```bash
-pnpm i next-sandbox
+```package-install
+next-sandbox
 ```
 
 ## Usage
 
 Create a dedicated route for sandbox usage and directly export `withSandbox` in `page.tsx`:
 
-`app/sandbox/page.tsx`
-
-```tsx
+```tsx title="app/sandbox/page.tsx"
 import { withSandbox } from 'next-sandbox';
 import { seedPosts } from './seed-posts';
 
