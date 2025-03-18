@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <div className="mt-36">
+    <div className="mt-20 md:mt-36">
       <h1 className="text-center md:text-start text-3xl md:text-5xl font-bold">
         Next Sandbox
       </h1>
