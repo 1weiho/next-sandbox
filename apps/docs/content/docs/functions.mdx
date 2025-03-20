@@ -1,0 +1,99 @@
+---
+title: functions
+description: The array of server actions.
+---
+
+## Server Actions
+
+Server Actions are special async functions that run on the server. They must include `'use server'` at the top of their definition so Next.js can recognize and execute them correctly.
+
+<Cards>
+  <Card
+    href="https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+    title="Server Actions and Mutations"
+  >
+    Learn more about server actions in Next.js
+  </Card>
+</Cards>
+
+## Defining Server Actions
+
+Server actions can be defined in two ways:
+
+### Within the Same File
+
+Define server actions directly above withSandbox, ensuring the 'use server' directive is placed at the top of each action:
+
+```tsx title="app/sandbox/page.tsx"
+import { withSandbox } from 'next-sandbox';
+
+const seedUsers = async () => {
+  'use server'; // [!code highlight]
+
+  // Some db calls
+};
+
+export default withSandbox({
+  functions: [
+    {
+      name: 'Seed Users',
+      function: seedUsers,
+    },
+  ],
+});
+```
+
+### Importing from Another File
+
+You can define server actions in separate files and import them where needed. Ensure the 'use server' directive is included at the top of the external file:
+
+```ts title="actions/users.ts"
+'use server'; // [!code highlight]
+
+export const seedUsers = async () => {
+  // Some db calls
+};
+```
+
+Then import the action:
+
+```tsx title="app/sandbox/page.tsx"
+import { withSandbox } from 'next-sandbox';
+import { seedUsers } from '@/actions/users'; // [!code highlight]
+
+export default withSandbox({
+  functions: [
+    {
+      name: 'Seed Users',
+      function: seedUsers,
+    },
+  ],
+});
+```
+
+## Avoid Inline Server Actions
+
+<Callout type="warn">
+  Avoid defining server actions inline within functions, as this pattern is not
+  supported and may cause unexpected behavior.
+</Callout>
+
+Incorrect usage example:
+
+```tsx title="app/sandbox/page.tsx"
+import { withSandbox } from 'next-sandbox';
+
+export default withSandbox({
+  functions: [
+    {
+      name: 'Seed Users',
+      function: async () => {
+        // [!code --]
+        'use server'; // [!code --]
+        // [!code --]
+        // Some db calls  // [!code --]
+      }, // [!code --]
+    },
+  ],
+});
+```
