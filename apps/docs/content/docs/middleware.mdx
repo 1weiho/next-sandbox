@@ -13,7 +13,6 @@ You can directly pass the server logic to be executed in the `middleware` parame
 
 {/* prettier-ignore-start */}
 ```tsx title="app/sandbox/page.tsx"
-import { seedUsers } from '@/actions/users';
 import { auth } from '@/lib/auth';
 import { withSandbox } from 'next-sandbox';
 import { forbidden } from 'next/navigation';
@@ -25,12 +24,7 @@ export default withSandbox({
       forbidden(); // [!code ++]
     } // [!code ++]
   }, // [!code ++]
-  functions: [
-    {
-      name: 'Seed Users',
-      function: seedUsers,
-    },
-  ],
+  // ...
 });
 ```
 {/* prettier-ignore-end */}

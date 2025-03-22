@@ -1,4 +1,17 @@
 ---
 title: enable
-description: Getting Started with Next Sandbox
+description: Enable or disable the sandbox route.
 ---
+
+## Usage
+
+`enable` is a boolean prop to enable or disable the sandbox route. If you set it to `false`, it will call `notFound()` from `next/navigation` internally. A common use case is to check if the current environment is production or not.
+
+```tsx
+import { withSandbox } from 'next-sandbox';
+
+export default withSandbox({
+  enable: process.env.NODE_ENV !== 'production', // [!code ++]
+  // ...
+});
+```
