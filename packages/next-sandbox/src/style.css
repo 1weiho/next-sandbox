@@ -191,6 +191,7 @@
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
 }
 
 .drawer-content {
@@ -198,7 +199,7 @@
   top: 8px;
   right: 8px;
   bottom: 8px;
-  z-index: 10;
+  z-index: 10000;
   outline: none;
   width: 600px;
   display: flex;
