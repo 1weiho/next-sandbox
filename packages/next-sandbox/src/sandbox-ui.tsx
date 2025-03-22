@@ -44,7 +44,7 @@ export function SandboxUI() {
       />
 
       <div className="sandbox-container">
-        <h1 className="sandbox-title">next-sandbox</h1>
+        <h1 className="sandbox-title">Next Sandbox</h1>
         <div className="functions-wrapper">
           <div className="functions-header">
             <span className="functions-label">Function</span>
