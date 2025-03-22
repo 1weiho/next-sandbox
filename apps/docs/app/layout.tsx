@@ -1,31 +1,17 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs';
-import 'nextra-theme-docs/style.css';
-import { Head } from 'nextra/components';
-import { getPageMap } from 'nextra/page-map';
-import { type ReactNode } from 'react';
+import './global.css';
+import { RootProvider } from 'fumadocs-ui/provider';
+import { Geist } from 'next/font/google';
+import type { ReactNode } from 'react';
 
-export const metadata = {};
+const geist = Geist({
+  subsets: ['latin'],
+});
 
-const navbar = <Navbar logo={<b>Next Sandbox</b>} />;
-const footer = <Footer>Next Sandbox by Yiwei Ho</Footer>;
-
-export default async function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
-      <Head></Head>
-      <body>
-        <Layout
-          navbar={navbar}
-          pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/1weiho/next-sandbox/tree/main/apps/docs"
-          footer={footer}
-        >
-          {children}
-        </Layout>
+    <html lang="en" className={geist.className} suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen">
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   );

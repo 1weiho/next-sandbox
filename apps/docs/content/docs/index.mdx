@@ -1,0 +1,35 @@
+---
+title: Get Started
+description: Getting started with Next Sandbox.
+---
+
+Next Sandbox is a lightweight package for testing and monitoring server actions in your Next.js application. It provides a simple UI to execute actions, view logs, and measure execution times.
+
+## Features
+
+- **Execute Actions**: Run server actions directly from the UI.
+- **View Logs & Metrics**: Monitor execution status, logs, and performance metrics (AVG, P75, P95).
+
+## Installation
+
+```package-install
+next-sandbox
+```
+
+## Usage
+
+Create a dedicated route for sandbox usage and directly export `withSandbox` in `page.tsx`:
+
+```tsx title="app/sandbox/page.tsx"
+import { withSandbox } from 'next-sandbox';
+import { seedPosts } from './seed-posts';
+
+export default withSandbox({
+  functions: [
+    {
+      name: 'Seed Posts',
+      function: seedPosts,
+    },
+  ],
+});
+```
