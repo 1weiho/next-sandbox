@@ -8,6 +8,11 @@ const geist = Geist({
   subsets: ['latin'],
 });
 
+const baseUrl =
+  process.env.NODE_ENV === 'development' || !process.env.VERCEL_URL
+    ? new URL('http://localhost:3000')
+    : new URL(`https://${process.env.VERCEL_URL}`);
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Next Sandbox',
@@ -29,7 +34,7 @@ export const metadata: Metadata = {
     creator: '@1weiho',
     images: '/banner.png',
   },
-  metadataBase: new URL('https://next-sandbox.1wei.dev'),
+  metadataBase: baseUrl,
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
