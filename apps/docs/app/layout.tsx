@@ -9,9 +9,11 @@ const geist = Geist({
 });
 
 const baseUrl =
-  process.env.NODE_ENV === 'development' || !process.env.VERCEL_URL
-    ? new URL('http://localhost:3000')
-    : new URL(`https://${process.env.VERCEL_URL}`);
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+    ? new URL('https://classroom.codeseedling.com')
+    : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
+      ? new URL(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`)
+      : new URL('http://localhost:3000');
 
 export const metadata: Metadata = {
   title: {
