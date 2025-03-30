@@ -10,18 +10,18 @@ export interface SandboxFunction {
 export interface SandboxConfig {
   functions: SandboxFunction[];
   enable?: boolean;
-  middleware?: () => Promise<any>;
+  beforeRender?: () => Promise<any>;
 }
 
 export function withSandbox({
   functions,
   enable = true,
-  middleware,
+  beforeRender,
 }: SandboxConfig) {
   return function SandboxWrapper() {
     return (
       <SandboxProvider functions={functions}>
-        <SandboxServer enable={enable} middleware={middleware} />
+        <SandboxServer enable={enable} beforeRender={beforeRender} />
       </SandboxProvider>
     );
   };

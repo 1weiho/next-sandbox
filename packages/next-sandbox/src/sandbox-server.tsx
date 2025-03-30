@@ -3,20 +3,20 @@ import { SandboxUI } from './sandbox-ui';
 
 interface SandboxServerProps {
   enable?: boolean;
-  middleware?: () => Promise<any>;
+  beforeRender?: () => Promise<any>;
 }
 
 export async function SandboxServer({
   enable,
-  middleware,
+  beforeRender,
 }: SandboxServerProps) {
   if (!enable) {
     const { notFound } = await import('next/navigation');
     notFound();
   }
 
-  if (middleware) {
-    await middleware();
+  if (beforeRender) {
+    await beforeRender();
   }
 
   return <SandboxUI />;
