@@ -49,7 +49,7 @@ export default withSandbox({
 });
 ```
 
-- **middleware** (optional): An asynchronous function that runs before executing the sandbox UI. This function operates entirely on the server, similar to a Server Component. It is useful for authentication, logging, or other preprocessing tasks. If provided, it will be executed before rendering the sandbox UI, ensuring that necessary checks and preparations are completed in a server-side context. A common use case is to restrict access to specific users, such as administrators:
+- **beforeRender** (optional): An asynchronous function that runs before rendering the sandbox UI. This function operates entirely on the server, similar to a Server Component. It is useful for authentication, logging, or other preprocessing tasks. If provided, it will be executed before rendering the sandbox UI, ensuring that necessary checks and preparations are completed in a server-side context. A common use case is to restrict access to specific users, such as administrators:
 
 ```tsx
 import { withSandbox } from 'next-sandbox';
@@ -57,7 +57,7 @@ import { auth } from '@/lib/auth';
 import { forbidden } from 'next/navigation';
 
 export default withSandbox({
-  middleware: async () => {
+  beforeRender: async () => {
     const user = await auth();
 
     if (user.role !== 'admin') {

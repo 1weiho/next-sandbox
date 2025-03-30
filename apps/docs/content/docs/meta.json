@@ -8,7 +8,7 @@
     "index",
     "---Props---",
     "functions",
-    "middleware",
+    "before-render",
     "enable"
   ]
 }
