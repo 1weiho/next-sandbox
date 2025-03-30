@@ -10,7 +10,7 @@ const geist = Geist({
 
 const baseUrl =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-    ? new URL('https://classroom.codeseedling.com')
+    ? new URL('https://next-sandbox.1wei.dev')
     : process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
       ? new URL(`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`)
       : new URL('http://localhost:3000');
