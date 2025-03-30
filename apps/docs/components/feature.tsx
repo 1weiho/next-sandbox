@@ -16,7 +16,7 @@ const Feature = () => {
       <Card
         icon={ShieldUser}
         title="Access Control"
-        description="Provide middleware methods to conveniently enable the sandbox for specific users or specific environments."
+        description="Provide a beforeRender method that allows users to perform server-side logic such as authentication and authorization before the Sandbox UI is rendered."
       />
     </div>
   );
