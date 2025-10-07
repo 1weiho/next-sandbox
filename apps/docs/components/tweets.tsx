@@ -9,28 +9,28 @@ const Tweets = () => {
         <Tweet
           username="theo"
           name="Theo - t3.gg"
-          avatarUrl="https://pbs.twimg.com/profile_images/1799982162831396865/Fnol01I1_400x400.jpg"
+          avatarUrl="/avatars/theo.png"
           content="Wait this is so useful"
           url="https://x.com/theo/status/1890857741012332753"
         />
         <Tweet
           username="bedesqui"
           name="Igor bedesqui"
-          avatarUrl="https://pbs.twimg.com/profile_images/1569386242080399361/DvmcYbkO_400x400.jpg"
+          avatarUrl="/avatars/bedesqui.png"
           content="huge"
           url="https://x.com/bedesqui/status/1890885944930087411"
         />
         <Tweet
           username="dakdevs"
           name="Dak"
-          avatarUrl="https://pbs.twimg.com/profile_images/1794572007432224768/RJqW0j6b_400x400.jpg"
+          avatarUrl="/avatars/dakdevs.png"
           content="Holy this is awesome!"
           url="https://x.com/dakdevs/status/1890878079955869774"
         />
         <Tweet
           username="Lermatroid"
           name="Liam Murray"
-          avatarUrl="https://pbs.twimg.com/profile_images/1895909837940133888/avR72KXc_400x400.jpg"
+          avatarUrl="/avatars/lermatroid.png"
           content="This looks sick 👀"
           url="https://x.com/Lermatroid/status/1891223229156467047"
         />
